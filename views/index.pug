@@ -1,0 +1,50 @@
+extend layout
+
+block content
+
+	if bl == 1
+		span.intent.
+			Сдать ЕГЭ!
+			Знать русский, математику, химию и биологию так, чтобы от зубов отлетали знания!
+			Для этого трудиться, трудиться и ещё раз трудиться!
+	else 
+		span.intent.
+			Закончить второй семестр на отлично!
+			Сдать не менее 2-ух рефератов, выступить не менее чем с 2-умя докладами, вступить в команду олимпиадников по информатике. Выиграть олимпиаду по химии и физике.
+
+	.container.top-container
+		if bl == 1
+			h1 Алина
+		else
+			h1 Эмиль
+		.top-menu
+			ul
+				li.write
+					i.glyphicon.glyphicon-pencil
+					b Написать
+				li.to-blogers
+					i.glyphicon.glyphicon-user
+					b К блогерам
+				li.letsgo
+					i.glyphicon.glyphicon-star
+					b Цели!
+
+	.container.write-sms
+		if bl == 1
+			form(method="post" action="/send_new/alina" role="form")
+				.form-group
+					textarea(name="text" placeholder="Введи своё сообщение").form-control
+				button.btn.btn-primary Отправить
+		else
+			form(method="post" action="/send_new/emil" role="form")
+				.form-group
+					textarea(name="text" placeholder="Введи своё сообщение").form-control
+				button.btn.btn-primary Отправить
+	.container.posts
+		ul
+			for i in rows
+				li.sms
+					p= i.text
+					div.date= i.dtime
+						span(style="display: none")= i.id
+				hr
